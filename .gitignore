@@ -1,0 +1,82 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+dist/
+build/
+*.egg-info/
+.eggs/
+
+# Jupyter Notebook files
+.ipynb_checkpoints
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# Sublime Text
+*.sublime*
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Pytest
+.cache/
+
+# Editor directories and files
+.vscode/
+*.swp
+*~
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Custom templates/data
+my_tool/templates/__pycache__/
+my_tool/__pycache__/
+my_tool/source1.yaml
+my_tool/fields.yml
+tests/__pycache__/
+
+# Logs and temp files
+*.log
+*.tmp
+
+# Credentials files
+.env
+openai_apikey.txt
+
+# Dependency directories
+deps/
