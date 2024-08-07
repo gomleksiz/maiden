@@ -9,6 +9,7 @@ import yaml
 from jinja2 import Template
 from openai import OpenAI
 import logging
+from maiden import __version__
 
 logging.basicConfig(level=logging.INFO)
 
@@ -125,6 +126,7 @@ def process_data_template_file(data_file):
 @click.argument('output_file')
 @click.option('--data-file', '-d', help='Data files in YAML format')
 @click.option('--process-data-template', is_flag=True, default=True, help="Process data file as a template")
+@click.version_option(__version__)
 def generate_md(template_file, output_file, data_file, process_data_template):
     """CLI command to generate markdown from template"""
     if process_data_template:
