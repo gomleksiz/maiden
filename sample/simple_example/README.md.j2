@@ -1,0 +1,21 @@
+# {{ title | title }}
+
+{{ description }}
+
+## Functions
+
+<% OPENAI
+    Describe the following python code and list the functions and describe them in 2 sentences each.
+    The output will be in markdown format and it will be in English. Do not put markdown tag in the beginning of the response. Functions will be ### tags.
+    
+    Don't add code samples to the response. It will be just the description of the code.
+
+    -- Code starts here --
+    <% FROM maiden/main.py GET 'content' %>
+    -- Code ends here --
+
+END %>
+
+## Change Log
+
+<% DATE %Y-%m-%d %> - Initial Version

@@ -24,9 +24,7 @@ def load_data(file_path):
     else:
         with open(file_path, 'r') as f:
             content = f.read()
-            if "END %>" in content:
-                content = content.replace("END %>", "END \%>")
-            return { "content" : content }
+            return { "content" : f.read() }
 
 def openai_prompt(prompt):
     """Generate text from OpenAI based on the prompt"""
@@ -62,6 +60,8 @@ def postprocess_template(template_str):
         data = load_data(source_file)
         
         # Split the key by dots to traverse nested dictionaries
+        # d = { "extension": { "version": "1.0.0" } }
+        # extension.version
         keys = key.split('.')
         value = data
         for key_ in keys:

@@ -1,0 +1,2 @@
+title: <% FROM project.yaml GET 'project.name' %> README File
+description: <% FROM project.yaml GET 'more.description' %>
