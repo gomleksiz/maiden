@@ -7,6 +7,7 @@ import click
 import yaml
 
 from jinja2 import Template
+from jinja2 import Environment, BaseLoader
 from openai import OpenAI
 import logging
 from maiden import __version__
@@ -107,13 +108,20 @@ def postprocess_template(template_str):
     return template_str
 
 def process_template(data, processed_template_str):
-    # Render the final markdown using Jinja2
-    template = Template(processed_template_str)
-
-    # Render template with data
-    result = template.render(data)
-
-    return result
+    def file_exists(path):
+        return os.path.isfile(path)
+    
+    # Create an environment
+    env = Environment(loader=BaseLoader())
+    
+    # Register the custom filter
+    env.filters['file_exists'] = file_exists
+    
+    # Create a template from the string
+    template = env.from_string(processed_template_str)
+    
+    # Render the template with the given data
+    return template.render(data)
 
 def process_data_template_file(data_file):
     logging.info("Processing Data Template File")
@@ -132,23 +140,25 @@ def process_data_template_file(data_file):
 @click.version_option(__version__)
 def generate_md(template_file, output_file, data_file, process_data_template):
     """CLI command to generate markdown from template"""
-    if process_data_template:
-        data = process_data_template_file(data_file)
-    else:
-        data = load_data(data_file)
+    if data_file:
+        if process_data_template:
+            data = process_data_template_file(data_file)
+        else:
+            data = load_data(data_file)
     
-    logging.info(f"Data = {data}")
+        logging.info(f"Data = {data}")
 
     with open(template_file, 'r') as f:
         template_str = f.read()
 
     # Preprocess template to replace custom syntax
-    processed_template_str = process_template(data, template_str)
-    processed_template_str = postprocess_template(processed_template_str)
+    if data_file:
+        template_str = process_template(data, template_str)
+    template_str = postprocess_template(template_str)
     
     # Write output to file
     with open(output_file, 'w') as f:
-        f.write(processed_template_str)
+        f.write(template_str)
 
 if __name__ == '__main__':
     generate_md()

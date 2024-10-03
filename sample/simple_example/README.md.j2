@@ -4,6 +4,18 @@
 
 ## Functions
 
+{% if 'maiden/main.py' | file_exists %}
+  <p>The file exists.</p>
+{% else %}
+  <p>The file does not exist.</p>
+{% endif %}
+
+{% if 'maiden/missing.py' | file_exists %}
+  <p>The file exists.</p>
+{% else %}
+  <p>The file does not exist.</p>
+{% endif %}
+
 <% OPENAI
     Describe the following python code and list the functions and describe them in 2 sentences each.
     The output will be in markdown format and it will be in English. Do not put markdown tag in the beginning of the response. Functions will be ### tags.
